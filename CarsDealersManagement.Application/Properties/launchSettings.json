@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Microservice": {
+      "commandName": "Project",
+      "commandLineArgs": "dotnet watch run",
+      "workingDirectory": "C:\\Projects\\CarDealersManagementAPI\\CarsDealersManagement.Microservice",
+      "remoteDebugEnabled": false,
+      "authenticationMode": "Windows"
+    }
+  }
+}

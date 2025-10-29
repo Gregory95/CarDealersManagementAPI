@@ -21,6 +21,8 @@ namespace CarsDealersManagement.Domain.Entities
 
         public int Capacity { get; set; }
 
+        public int DealerId { get; set; } = default!;
+
         public static Showroom Create(string name, string location, int capacity)
         {
             return new Showroom(name, location, capacity);

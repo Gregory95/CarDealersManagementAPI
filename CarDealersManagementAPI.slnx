@@ -2,5 +2,5 @@
   <Project Path="CarsDealersManagement.Application/CarsDealersManagement.Application.csproj" />
   <Project Path="CarsDealersManagement.Domain/CarsDealersManagement.Domain.csproj" />
   <Project Path="CarsDealersManagement.Infrastructure/CarsDealersManagement.Infrastructure.csproj" />
-  <Project Path="WebApplication1/CarsDealersManagement.Microservice.csproj" />
+  <Project Path="CarsDealersManagement.Microservice/CarsDealersManagement.Microservice.csproj" />
 </Solution>

@@ -27,6 +27,8 @@ namespace CarsDealersManagement.Domain.Entities
         [MaxLength(25)]
         public string PhoneNumber { get; set; } = default!;
 
+        public virtual ICollection<Showroom> Showrooms { get; set; } = new List<Showroom>();
+
         public static Dealer Create(string firstName, string lastName, string email, string phoneNumber)
         {
             return new Dealer(firstName, lastName, email, phoneNumber);

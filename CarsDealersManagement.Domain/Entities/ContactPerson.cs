@@ -6,7 +6,7 @@ namespace CarsDealersManagement.Domain.Entities
     {
         public ContactPerson() { }
 
-        public ContactPerson(string firstName, string lastName, string email, string phoneNumber)
+        public ContactPerson(string firstName, string lastName, string? email, string phoneNumber)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -21,17 +21,21 @@ namespace CarsDealersManagement.Domain.Entities
         public string LastName { get; set; } = default!;
 
         [MaxLength(100)]
-        public string Email { get; set; } = default!;
+        public string? Email { get; set; }
 
         [MaxLength(25)]
         public string PhoneNumber { get; set; } = default!;
 
-        public static ContactPerson Create(string firstName, string lastName, string email, string phoneNumber)
+        public int ShowroomId { get; set; }
+
+        public virtual Showroom Showroom { get; set; }
+
+        public static ContactPerson Create(string firstName, string lastName, string? email, string phoneNumber)
         {
             return new ContactPerson(firstName, lastName, email, phoneNumber);
         }
 
-        public void Update(string firstName, string lastName, string email, string phoneNumber)
+        public void Update(string firstName, string lastName, string? email, string phoneNumber)
         {
             FirstName = firstName;
             LastName = lastName;
