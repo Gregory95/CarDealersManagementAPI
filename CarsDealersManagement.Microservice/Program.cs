@@ -2,7 +2,6 @@ using CarsDealersManagement.Infrastructure;
 using CarsDealersManagement.Infrastructure.Data;
 using CarsDealersManagement.Microservice.Middlewares;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
