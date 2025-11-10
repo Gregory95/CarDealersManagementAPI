@@ -1,5 +1,7 @@
 ﻿using CarsDealersManagement.Domain.Entities;
+using CarsDealersManagement.Domain.Repositories;
 using CarsDealersManagement.Infrastructure.Data;
+using CarsDealersManagement.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -110,6 +112,10 @@ public static class InfrastructureExtension
         });
 
         services.Configure<DataProtectionTokenProviderOptions>(opt => opt.TokenLifespan = TimeSpan.FromHours(2));
+
+        services.AddTransient<IDealersRepository, DealersRepository>();
+        services.AddTransient<IContactPersonsRepository, ContactPersonsRepository>();
+        services.AddTransient<IShowroomsRepository, ShowroomsRepository>();
 
         return services;
     }

@@ -31,7 +31,7 @@ public class ExceptionHandlerMiddleware
                 Title = (HttpStatusCode)context.Response.StatusCode == HttpStatusCode.BadRequest
                     ? "Bad Request"
                     : "Internal Server Error",
-                Description = ex is FluentValidation.ValidationException
+                Description = !string.IsNullOrEmpty(ex.Message)
                     ? ex.Message
                     : "An unexpected error occurred.",
                 Status = (HttpStatusCode)context.Response.StatusCode

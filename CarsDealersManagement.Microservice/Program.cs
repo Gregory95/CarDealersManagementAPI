@@ -1,3 +1,4 @@
+using CarsDealersManagement.Application;
 using CarsDealersManagement.Infrastructure;
 using CarsDealersManagement.Infrastructure.Data;
 using CarsDealersManagement.Microservice.Middlewares;
@@ -12,7 +13,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddInfrastructure(configuration);
+builder.Services.AddApplication()
+    .AddInfrastructure(configuration);
 
 var app = builder.Build();
 
