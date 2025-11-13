@@ -1,4 +1,5 @@
-﻿using PagingPackage;
+﻿
+using Pagination.Query.EntityFramework;
 
 namespace CarsDealersManagement.Domain.Repositories
 {
@@ -10,6 +11,6 @@ namespace CarsDealersManagement.Domain.Repositories
         Task UpdateAsync(T message, CancellationToken ct);
         Task DeleteAsync(int Id, CancellationToken ct);
         void Delete(int Id);
-        Task<PagingToolkit<T>> GetPagedAsync(IQueryable<T> query, int pageNumber, int pageSize, CancellationToken ct);
+        Task<PagingWrap<T>> GetPagedAsync(IQueryable<T> query, int pageNumber, int pageSize, CancellationToken ct);
     }
 }

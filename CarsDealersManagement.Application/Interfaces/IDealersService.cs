@@ -1,6 +1,6 @@
 ﻿using CarsDealersManagement.Domain.Entities;
 using CarsDealersManagement.Domain.Models;
-using PagingPackage;
+using Pagination.Query.EntityFramework;
 
 namespace CarsDealersManagement.Application.Interfaces
 {
@@ -8,6 +8,6 @@ namespace CarsDealersManagement.Application.Interfaces
     {
         Task<IEnumerable<DealersDto>> GetDetailsAsync(CancellationToken ct);
 
-        Task<PagingToolkit<DealersDto>> GetDealersPagingAsync(PagingParameters parameters, CancellationToken ct);
+        Task<PagingWrap<DealersDto>> GetDealersPagingAsync(PagingRequest parameters, CancellationToken ct);
     }
 }

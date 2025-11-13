@@ -1,1 +1,7 @@
-{}
+{
+  "profiles": {
+    "CarsDealersManagement.Microservice": {
+      "commandName": "Project"
+    }
+  }
+}

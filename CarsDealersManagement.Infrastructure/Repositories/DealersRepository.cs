@@ -2,7 +2,7 @@
 using CarsDealersManagement.Domain.Repositories;
 using CarsDealersManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using PagingPackage;
+using Pagination.Query.EntityFramework;
 
 
 namespace CarsDealersManagement.Infrastructure.Repositories
@@ -54,9 +54,9 @@ namespace CarsDealersManagement.Infrastructure.Repositories
             await _db.SaveChangesAsync(ct);
         }
 
-        public async Task<PagingToolkit<Dealer>> GetPagedAsync(IQueryable<Dealer> query, int pageNumber, int pageSize, CancellationToken ct)
+        public async Task<PagingWrap<Dealer>> GetPagedAsync(IQueryable<Dealer> query, int pageNumber, int pageSize, CancellationToken ct)
         {
-            return await PagingToolkit<Dealer>.CreateAsync(query, pageNumber, pageSize, ct);
+            return await PagingWrap<Dealer>.CreateAsync(query, pageNumber, pageSize, ct);
         }
     }
 }

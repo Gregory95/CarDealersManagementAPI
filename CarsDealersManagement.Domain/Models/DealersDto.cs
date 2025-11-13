@@ -1,6 +1,4 @@
-﻿using CarsDealersManagement.Domain.Entities;
-
-namespace CarsDealersManagement.Domain.Models
+﻿namespace CarsDealersManagement.Domain.Models
 {
     public class DealersDto : BaseDto
     {        

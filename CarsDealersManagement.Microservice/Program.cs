@@ -10,6 +10,24 @@ ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddCors(
+    options => options.AddPolicy("AllowCors",
+    builder =>
+    {
+        builder.SetIsOriginAllowed(origin => true)
+        .AllowCredentials()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    })
+);
+
+builder.Services.AddAutoMapper((serviceProvider, cfg) =>
+{
+    cfg.ShouldMapProperty = pi => pi.GetIndexParameters().Length == 0;
+}, AppDomain.CurrentDomain.GetAssemblies());
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -26,6 +44,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
+app.UseRouting();
+
+app.UseCors("AllowCors");
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();

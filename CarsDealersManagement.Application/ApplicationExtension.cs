@@ -8,7 +8,7 @@ namespace CarsDealersManagement.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(ApplicationExtension).Assembly);
+            services.AddAutoMapper(cfg => cfg.AddMaps(typeof(MappingProfiles).Assembly));
 
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
             services.AddScoped<IDealersService, DealersService>();
