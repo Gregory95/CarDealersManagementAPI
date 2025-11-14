@@ -12,6 +12,7 @@ namespace CarsDealersManagement.Application
 
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
             services.AddScoped<IDealersService, DealersService>();
+            services.AddScoped<IContactPersonsService, ContactPersonsService>();
             services.AddScoped<IEmailSender, EmailSender>();
 
             return services;

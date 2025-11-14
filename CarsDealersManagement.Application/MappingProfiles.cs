@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CarsDealersManagement.Domain.Entities;
 using CarsDealersManagement.Domain.Models;
-using Pagination.Query.EntityFramework;
 
 namespace CarsDealersManagement.Application
 {
@@ -10,7 +9,8 @@ namespace CarsDealersManagement.Application
         public MappingProfiles()
         {
             CreateMap<Dealer, DealersDto>().ReverseMap();
-            CreateMap<PagingWrap<Dealer>, PagingWrap<DealersDto>>().ReverseMap();
+            CreateMap<ContactPerson, ContactPersonDto>().ReverseMap();
+            CreateMap<Showroom, ShowroomDto>().ReverseMap();
         }
     }
 }

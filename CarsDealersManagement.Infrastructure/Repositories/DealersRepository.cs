@@ -12,7 +12,7 @@ namespace CarsDealersManagement.Infrastructure.Repositories
         public async Task AddAsync(Dealer message, CancellationToken ct)
         {
             await _db.Dealers.AddAsync(message, ct);
-            await _db.SaveChangesLightAsync(ct);
+            await _db.SaveChangesAsync(ct);
         }
 
         public void Delete(int Id)

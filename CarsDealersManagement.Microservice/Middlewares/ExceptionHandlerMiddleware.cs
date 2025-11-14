@@ -19,6 +19,38 @@ public class ExceptionHandlerMiddleware
         {
             await _next(context);
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+
+            var result = JsonSerializer.Serialize(new ErrorResponse
+            {
+                Title = "Unauthorised",
+                Description = !string.IsNullOrEmpty(ex.Message)
+                    ? ex.Message
+                    : "Access denied.",
+                Status = (HttpStatusCode)context.Response.StatusCode
+            });
+
+            await context.Response.WriteAsync(result);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+
+            var result = JsonSerializer.Serialize(new ErrorResponse
+            {
+                Title = "Not found",
+                Description = !string.IsNullOrEmpty(ex.Message)
+                    ? ex.Message
+                    : "Record not found",
+                Status = (HttpStatusCode)context.Response.StatusCode
+            });
+
+            await context.Response.WriteAsync(result);
+        }
         catch (Exception ex)
         {
             context.Response.ContentType = "application/json";

@@ -42,7 +42,7 @@ namespace CarsDealersManagement.Infrastructure.Data
 
         private void AuditInfo()
         {
-            foreach (var entry in ChangeTracker.Entries<BaseEntity>())
+            foreach (var entry in ChangeTracker.Entries<BaseEntity>().AsEnumerable())
             {
                 if (entry.State == EntityState.Modified)
                 {
