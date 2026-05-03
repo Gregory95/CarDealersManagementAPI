@@ -11,6 +11,7 @@ namespace CarsDealersManagement.Application
             CreateMap<Dealer, DealersDto>().ReverseMap();
             CreateMap<ContactPerson, ContactPersonDto>().ReverseMap();
             CreateMap<Showroom, ShowroomDto>().ReverseMap();
+            CreateMap<ApplicationUser, RegisterUserResponseDto>().ReverseMap();
         }
     }
 }
