@@ -25,7 +25,7 @@ namespace CarsDealersManagement.Microservice.Controllers
         public async Task<IActionResult> AddDealerAsync([FromBody] DealersDto message, CancellationToken ct)
         {
             await _service.CreateDealerAsync(message, ct);
-            return NoContent();
+            return Ok(message.Id);
         }
 
         [HttpPut]
