@@ -40,7 +40,7 @@ public class DealersControllerTests
 
         var result = await _controller.AddDealerAsync(dto, CancellationToken.None);
 
-        result.Should().BeOfType<NoContentResult>();
+        result.Should().BeOfType<OkObjectResult>();
         _service.Verify(x => x.CreateDealerAsync(dto, It.IsAny<CancellationToken>()), Times.Once);
     }
 
