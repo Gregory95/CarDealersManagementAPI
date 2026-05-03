@@ -173,7 +173,7 @@ namespace CarsDealersManagement.Application.Services
 
             var newUserResult = await _userManager.CreateAsync(newUser, message.Password);
 
-            if (newUserResult.Succeeded)
+            if (!newUserResult.Succeeded)
             {
                 throw new Exception("Make sure that all mandatory fields are filled and password satisfies the security policy.");
             }

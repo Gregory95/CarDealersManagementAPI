@@ -1,0 +1,62 @@
+name: Unit Tests
+
+# Runs on every pull request targeting master.
+# The PR cannot be merged until this job passes.
+on:
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  checks: write          # needed to publish the test results panel
+  pull-requests: write   # needed to comment on the PR with results
+
+jobs:
+  test:
+    name: Build & Test (.NET 9)
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Source ────────────────────────────────────────────────────────────
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── 2. SDK ───────────────────────────────────────────────────────────────
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # ── 3. NuGet cache (speeds up subsequent runs) ───────────────────────────
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      # ── 4. Build Microservice ─────────────────────────────────────────────────
+      # The test project uses a direct DLL reference to the Microservice (to avoid
+      # rebuild conflicts when the API is running locally). The DLL must exist
+      # before building the test project, so we build Microservice first.
+      - name: Build Microservice
+        run: dotnet build CarsDealersManagement.Microservice/CarsDealersManagement.Microservice.csproj -c Release
+
+      # ── 5. Run tests ──────────────────────────────────────────────────────────
+      - name: Run Unit Tests
+        run: >
+          dotnet test CarsDealersManagement.Tests/CarsDealersManagement.Tests.csproj
+          -c Release
+          --verbosity normal
+          --logger "trx;LogFileName=results.trx"
+          --results-directory ./test-results
+
+      # ── 6. Publish results panel (visible in GitHub's Checks tab) ────────────
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        if: always()   # run even when tests fail so we always get the report
+        with:
+          name: Unit Test Results
+          path: ./test-results/results.trx
+          reporter: dotnet-trx
+          fail-on-error: true
