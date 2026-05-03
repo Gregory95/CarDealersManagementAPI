@@ -10,10 +10,11 @@ namespace CarsDealersManagement.Application
         {
             services.AddAutoMapper(cfg => cfg.AddMaps(typeof(MappingProfiles).Assembly));
 
+            services.AddSingleton<IEmailSender, EmailSender>();
+
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
             services.AddScoped<IDealersService, DealersService>();
             services.AddScoped<IContactPersonsService, ContactPersonsService>();
-            services.AddScoped<IEmailSender, EmailSender>();
 
             return services;
         }

@@ -1,11 +1,11 @@
-﻿using CarsShowroomsManagement.Application.Interfaces;
+﻿using CarsDealersManagement.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pagination.Query.EntityFramework;
 using CarsDealersManagement.Domain.Entities;
 using CarsDealersManagement.Domain.Models;
 
-namespace CarsShowroomsManagement.Microservice.Controllers
+namespace CarsDealersManagement.Microservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,37 +15,37 @@ namespace CarsShowroomsManagement.Microservice.Controllers
     public class ShowroomsController(IShowroomsService _service) : ControllerBase
     {
         [HttpPost("search")]
-        public async Task<ActionResult<PagingWrap<Showroom>>> SearchShowroomsAsync([FromBody] PagingRequest message)
+        public async Task<ActionResult<PagingWrap<Showroom>>> SearchShowroomsAsync([FromBody] PagingRequest message, CancellationToken ct)
         {
-            var result = await _service.GetShowroomsPagingAsync(message, CancellationToken.None);
+            var result = await _service.GetShowroomsPagingAsync(message, ct);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddShowroomAsync([FromBody] ShowroomDto message)
+        public async Task<IActionResult> AddShowroomAsync([FromBody] ShowroomDto message, CancellationToken ct)
         {
-            await _service.CreateShowroomAsync(message, CancellationToken.None);
+            await _service.CreateShowroomAsync(message, ct);
             return NoContent();
         }
 
         [HttpPut]
-        public async Task<ActionResult<ShowroomDto>> EditShowroomAsync([FromBody] ShowroomDto message)
+        public async Task<ActionResult<ShowroomDto>> EditShowroomAsync([FromBody] ShowroomDto message, CancellationToken ct)
         {
-            var result = await _service.EditShowroomAsync(message, CancellationToken.None);
+            var result = await _service.EditShowroomAsync(message, ct);
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ShowroomDto>> GetShowroomByIdAsync(int id)
+        public async Task<ActionResult<ShowroomDto>> GetShowroomByIdAsync(int id, CancellationToken ct)
         {
-            var result = await _service.GetShowroomByIdAsync(id, CancellationToken.None);
+            var result = await _service.GetShowroomByIdAsync(id, ct);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ShowroomDto>> DeleteShowroomAsync(int id)
+        public async Task<ActionResult<ShowroomDto>> DeleteShowroomAsync(int id, CancellationToken ct)
         {
-            await _service.DeleteShowroomAsync(id, CancellationToken.None);
+            await _service.DeleteShowroomAsync(id, ct);
             return Ok(id);
         }
     }

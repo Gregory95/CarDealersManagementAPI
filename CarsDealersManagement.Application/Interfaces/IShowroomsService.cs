@@ -2,7 +2,7 @@
 using CarsDealersManagement.Domain.Models;
 using Pagination.Query.EntityFramework;
 
-namespace CarsShowroomsManagement.Application.Interfaces
+namespace CarsDealersManagement.Application.Interfaces
 {
     public interface IShowroomsService
     {

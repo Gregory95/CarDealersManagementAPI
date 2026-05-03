@@ -15,37 +15,37 @@ namespace CarsContactPersonsManagement.Microservice.Controllers
     public class ContactPersonsController(IContactPersonsService _service) : ControllerBase
     {
         [HttpPost("search")]
-        public async Task<ActionResult<PagingWrap<ContactPerson>>> SearchContactPersonsAsync([FromBody] PagingRequest message)
+        public async Task<ActionResult<PagingWrap<ContactPerson>>> SearchContactPersonsAsync([FromBody] PagingRequest message, CancellationToken ct)
         {
-            var result = await _service.GetContactPersonsPagingAsync(message, CancellationToken.None);
+            var result = await _service.GetContactPersonsPagingAsync(message, ct);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddContactPersonAsync([FromBody] ContactPersonDto message)
+        public async Task<IActionResult> AddContactPersonAsync([FromBody] ContactPersonDto message, CancellationToken ct)
         {
-            await _service.CreateContactPersonAsync(message, CancellationToken.None);
+            await _service.CreateContactPersonAsync(message, ct);
             return NoContent();
         }
 
         [HttpPut]
-        public async Task<ActionResult<ContactPersonDto>> EditContactPersonAsync([FromBody] ContactPersonDto message)
+        public async Task<ActionResult<ContactPersonDto>> EditContactPersonAsync([FromBody] ContactPersonDto message, CancellationToken ct)
         {
-            var result = await _service.EditContactPersonAsync(message, CancellationToken.None);
+            var result = await _service.EditContactPersonAsync(message, ct);
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContactPersonDto>> GetContactPersonByIdAsync(int id)
+        public async Task<ActionResult<ContactPersonDto>> GetContactPersonByIdAsync(int id, CancellationToken ct)
         {
-            var result = await _service.GetContactPersonByIdAsync(id, CancellationToken.None);
+            var result = await _service.GetContactPersonByIdAsync(id, ct);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ContactPersonDto>> DeleteContactPersonAsync(int id)
+        public async Task<ActionResult<ContactPersonDto>> DeleteContactPersonAsync(int id, CancellationToken ct)
         {
-            await _service.DeleteContactPersonAsync(id, CancellationToken.None);
+            await _service.DeleteContactPersonAsync(id, ct);
             return Ok(id);
         }
     }

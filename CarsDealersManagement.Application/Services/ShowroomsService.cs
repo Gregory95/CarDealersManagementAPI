@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using CarsShowroomsManagement.Application.Interfaces;
+using CarsDealersManagement.Application.Interfaces;
 using Pagination.Query.EntityFramework;
 using CarsDealersManagement.Domain.Entities;
 using CarsDealersManagement.Domain.Repositories;
 using CarsDealersManagement.Domain.Models;
 
 
-namespace CarsShowroomsManagement.Application.Services
+namespace CarsDealersManagement.Application.Services
 {
     public class ShowroomsService(IShowroomsRepository _repo, IMapper _mapper) : IShowroomsService
     {

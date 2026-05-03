@@ -15,37 +15,37 @@ namespace CarsDealersManagement.Microservice.Controllers
     public class DealersController(IDealersService _service) : ControllerBase
     {
         [HttpPost("search")]
-        public async Task<ActionResult<PagingWrap<Dealer>>> SearchDealersAsync([FromBody] PagingRequest message)
+        public async Task<ActionResult<PagingWrap<Dealer>>> SearchDealersAsync([FromBody] PagingRequest message, CancellationToken ct)
         {
-            var result = await _service.GetDealersPagingAsync(message, CancellationToken.None);
+            var result = await _service.GetDealersPagingAsync(message, ct);
             return Ok(result);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDealerAsync([FromBody] DealersDto message)
+        public async Task<IActionResult> AddDealerAsync([FromBody] DealersDto message, CancellationToken ct)
         {
-            await _service.CreateDealerAsync(message, CancellationToken.None);
+            await _service.CreateDealerAsync(message, ct);
             return NoContent();
         }
 
         [HttpPut]
-        public async Task<ActionResult<DealersDto>> EditDealerAsync([FromBody] DealersDto message)
+        public async Task<ActionResult<DealersDto>> EditDealerAsync([FromBody] DealersDto message, CancellationToken ct)
         {
-            var result = await _service.EditDealerAsync(message, CancellationToken.None);
+            var result = await _service.EditDealerAsync(message, ct);
             return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<DealersDto>> GetDealerByIdAsync(int id)
+        public async Task<ActionResult<DealersDto>> GetDealerByIdAsync(int id, CancellationToken ct)
         {
-            var result = await _service.GetDealerByIdAsync(id, CancellationToken.None);
+            var result = await _service.GetDealerByIdAsync(id, ct);
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DealersDto>> DeleteDealerAsync(int id)
+        public async Task<ActionResult<DealersDto>> DeleteDealerAsync(int id, CancellationToken ct)
         {
-            await _service.DeleteDealerAsync(id, CancellationToken.None);
+            await _service.DeleteDealerAsync(id, ct);
             return Ok(id);
         }
     }

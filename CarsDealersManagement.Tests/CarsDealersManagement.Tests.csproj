@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarsDealersManagement.Domain\CarsDealersManagement.Domain.csproj" />
+    <ProjectReference Include="..\CarsDealersManagement.Application\CarsDealersManagement.Application.csproj" />
+    <ProjectReference Include="..\CarsDealersManagement.Infrastructure\CarsDealersManagement.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Direct DLL reference instead of project reference because the Microservice is an Exe
+      and its .exe file is locked while the API is running. The DLL is always readable.
+      If you change controller/middleware code, rebuild the Microservice once, then run tests.
+    -->
+    <Reference Include="CarsDealersManagement.Microservice">
+      <HintPath>..\CarsDealersManagement.Microservice\bin\$(Configuration)\net9.0\CarsDealersManagement.Microservice.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

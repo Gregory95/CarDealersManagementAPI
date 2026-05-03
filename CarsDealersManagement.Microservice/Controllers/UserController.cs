@@ -39,7 +39,7 @@ namespace CarsDealersManagement.Microservice.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("delete{userName}")]
+        [HttpDelete("delete/{userName}")]
         public async Task<ActionResult<string>> DeleteUserAsync(string userName)
         {
             var result = await _service.DeleteUserAsync(userName);
